@@ -23,7 +23,8 @@ class Library:
 		self.musicPathSystem = musicPathSystem
 		self.filesOnly = filesOnly
 		if type(itunesxml) == str:
-			self.il = plistlib.readPlist(itunesxml) #Much better support of xml special characters
+			with open(itunesxml, 'rb') as f:
+				self.il = plistlib.load(f) #Much better support of xml special characters
 			self.legacymode = False
 			self.songs = {}
 		else:
@@ -151,3 +152,4 @@ class Library:
 		else:
 			logger.warning("xspf library missing, go to https://github.com/alastair/xspf to install.")
 			return None
+			
